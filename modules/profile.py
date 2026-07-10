@@ -5,7 +5,10 @@ from modules.csv_manager import save_profile, load_profile
 class ProfileFrame(ctk.CTkFrame):
 
     def __init__(self, master):
+        
         super().__init__(master)
+
+        self.master = master
 
         self.pack(fill="both", expand=True, padx=20, pady=20)
 
@@ -40,7 +43,15 @@ class ProfileFrame(ctk.CTkFrame):
             command=self.save
         ).pack(pady=20)
 
+        ctk.CTkButton(
+            self,
+            text="ホームへ戻る",
+            command=self.master.show_home
+        ).pack(pady=10)
+
         self.load()
+
+    
 
     def save(self):
 
@@ -70,3 +81,5 @@ class ProfileFrame(ctk.CTkFrame):
 
             for key, value in zip(keys, data):
                 self.entries[key].insert(0, value)
+
+    
