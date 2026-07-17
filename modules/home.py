@@ -26,5 +26,20 @@ class HomeFrame(ctk.CTkFrame):
         )
         profile_button.pack(pady=20)
 
+        #7月17日追加
+        exercise_button = ctk.CTkButton(
+            self,
+            text="運動記録",
+            width=250,
+            height=40,
+            command=self.open_exercise
+        )
+
+        exercise_button.pack(pady=10)
+
     def open_profile(self):
         self.master.show_profile()
+
+    #7月17日追加
+    def open_exercise(self):
+        self.master.show_exercise()

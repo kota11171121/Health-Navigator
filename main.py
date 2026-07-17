@@ -2,6 +2,8 @@ import customtkinter as ctk
 
 from modules.home import HomeFrame
 from modules.profile import ProfileFrame
+#7月17日追加
+from modules.exercise import ExerciseFrame
 
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
@@ -31,6 +33,10 @@ class App(ctk.CTk):
 
     def show_profile(self):
         self.change_frame(ProfileFrame)
+
+    #7月17日追加
+    def show_exercise(self):
+        self.change_frame(ExerciseFrame)
 
 
 app = App()
