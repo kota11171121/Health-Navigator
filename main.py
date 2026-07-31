@@ -4,6 +4,7 @@ from modules.home import HomeFrame
 from modules.profile import ProfileFrame
 #7月17日追加
 from modules.exercise import ExerciseFrame
+from modules.advice import AdviceFrame
 
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
@@ -37,6 +38,10 @@ class App(ctk.CTk):
     #7月17日追加
     def show_exercise(self):
         self.change_frame(ExerciseFrame)
+
+    #7月27日追加
+    def show_advice(self):
+        self.change_frame(AdviceFrame)
 
 
 app = App()
