@@ -71,22 +71,61 @@ class ExerciseFrame(ctk.CTkFrame):
             command=self.master.show_home
         ).pack()
 
+        self.graph_frame = ctk.CTkFrame(
+            self
+        )
+
+        self.graph_frame.pack(
+            fill="both",
+            expand=True,
+            padx=20,
+            pady=20
+        )
+
 
     #7月17日追加
     def show_graph(self):
 
         df = load_exercise()
 
+        # データが存在しない場合
         if df is None:
+            print("exercise.csv がありません")
             return
 
-        df["日付"] = pd.to_datetime(df["日付"])
+        # データが空の場合
+        if df.empty:
+            print("exercise.csv にデータがありません")
+            return
+
+        print("読み込んだデータ")
+        print(df)
+
+        # 日付をdatetimeに変換
+        df["日付"] = pd.to_datetime(
+            df["日付"],
+            errors="coerce"
+        )
+
+        # 徒歩時間を数値に変換
+        df["徒歩(分)"] = pd.to_numeric(
+            df["徒歩(分)"],
+            errors="coerce"
+        )
+
+        # NaNを削除
+        df = df.dropna(
+            subset=["日付", "徒歩(分)"]
+        )
+
+        # 日付順に並べる
         df = df.sort_values("日付")
 
-        df["徒歩(分)"] = pd.to_numeric(df["徒歩(分)"], errors="coerce")
-        df = df.dropna()
-
-        fig = plt.Figure(figsize=(6,3), dpi=100)
+        # グラフを作成
+        fig = plt.Figure(
+            figsize=(6, 3),
+            dpi=100
+        )
 
         ax = fig.add_subplot(111)
 
@@ -96,21 +135,27 @@ class ExerciseFrame(ctk.CTkFrame):
             marker="o"
         )
 
-        ax.set_title("徒歩時間の推移")
-        ax.set_xlabel("日付")
-        ax.set_ylabel("分")
+        # 日付を見やすくする
+        fig.autofmt_xdate()
 
+        # 以前のグラフを削除
         if hasattr(self, "canvas"):
             self.canvas.get_tk_widget().destroy()
 
-        self.canvas = FigureCanvasTkAgg(fig, self)
+        # グラフを作成
+        self.canvas = FigureCanvasTkAgg(
+            fig,
+            master=self.graph_frame
+        )
 
         self.canvas.draw()
 
+        # グラフを表示
         self.canvas.get_tk_widget().pack(
-            pady=20,
             fill="both",
-            expand=True
+            expand=True,
+            padx=10,
+            pady=10
         )
     
     def save(self):
