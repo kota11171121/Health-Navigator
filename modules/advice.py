@@ -4,8 +4,8 @@ from modules.gemini_api import get_health_advice
 from modules.csv_manager import load_profile
 from modules.csv_manager import load_exercise
 
-
 class AdviceFrame(ctk.CTkFrame):
+
 
     def __init__(self, master):
 
@@ -13,72 +13,433 @@ class AdviceFrame(ctk.CTkFrame):
 
         self.master = master
 
-        self.pack(fill="both", expand=True)
+        # ==========================
+        # 画面全体
+        # ==========================
+
+        self.configure(
+            fg_color="#EAF6FF"
+        )
+
+        self.pack(
+            fill="both",
+            expand=True,
+            padx=20,
+            pady=20
+        )
+
+        # ==========================
+        # タイトル
+        # ==========================
 
         title = ctk.CTkLabel(
             self,
-            text="健康アドバイス",
-            font=("Yu Gothic", 24, "bold")
+            text="🤖 健康アドバイス",
+            font=("Hiragino Sans", 30, "bold")
         )
 
-        title.pack(pady=20)
+        title.pack(
+            pady=(10, 5)
+        )
+
+        subtitle = ctk.CTkLabel(
+            self,
+            text="AIがあなたの健康記録をもとにアドバイスします",
+            font=("Hiragino Sans", 14)
+        )
+
+        subtitle.pack(
+            pady=(0, 15)
+        )
+
+        # ==========================
+        # 健康データカード
+        # ==========================
+
+        data_card = ctk.CTkFrame(
+            self,
+            corner_radius=18,
+            border_width=1,
+            border_color="#D8D8D8",
+            fg_color="white"
+        )
+
+        data_card.pack(
+            fill="x",
+            padx=20,
+            pady=10
+        )
+
+        data_title = ctk.CTkLabel(
+            data_card,
+            text="🩺 現在の健康データ",
+            font=("Hiragino Sans", 18, "bold"),
+            text_color="#2196F3"
+        )
+
+        data_title.pack(
+            anchor="w",
+            padx=25,
+            pady=(15, 10)
+        )
+
+        # ==========================
+        # データ表示
+        # ==========================
+
+        self.data_label = ctk.CTkLabel(
+            data_card,
+            text="健康データを読み込んでいます...",
+            font=("Hiragino Sans", 14),
+            justify="left",
+            anchor="w"
+        )
+
+        self.data_label.pack(
+            fill="x",
+            padx=25,
+            pady=(0, 20)
+        )
+
+        # ==========================
+        # アドバイス取得ボタン
+        # ==========================
+
+        advice_button = ctk.CTkButton(
+            self,
+            text="🤖 アドバイスを取得",
+            width=280,
+            height=50,
+            corner_radius=15,
+            fg_color="#4CAF50",
+            hover_color="#388E3C",
+            font=("Hiragino Sans", 16, "bold"),
+            command=self.get_advice
+        )
+
+        advice_button.pack(
+            pady=(15, 10)
+        )
+
+        # ==========================
+        # アドバイス表示カード
+        # ==========================
+
+        advice_card = ctk.CTkFrame(
+            self,
+            corner_radius=18,
+            border_width=1,
+            border_color="#D8D8D8",
+            fg_color="white"
+        )
+
+        advice_card.pack(
+            fill="both",
+            expand=True,
+            padx=20,
+            pady=10
+        )
+
+        advice_title = ctk.CTkLabel(
+            advice_card,
+            text="💡 Geminiからの健康アドバイス",
+            font=("Hiragino Sans", 18, "bold"),
+            text_color="#2196F3"
+        )
+
+        advice_title.pack(
+            anchor="w",
+            padx=20,
+            pady=(15, 10)
+        )
 
         self.textbox = ctk.CTkTextbox(
-            self,
-            width=500,
-            height=300
+            advice_card,
+            height=220,
+            font=("Hiragino Sans", 14),
+            corner_radius=10
         )
 
-        self.textbox.pack(padx=20, pady=20)
+        self.textbox.pack(
+            fill="both",
+            expand=True,
+            padx=20,
+            pady=(0, 15)
+        )
 
-        ctk.CTkButton(
-            self,
-            text="アドバイスを取得",
-            command=self.get_advice
-        ).pack(pady=10)
+        # ==========================
+        # ホームへ戻るボタン
+        # ==========================
 
-        ctk.CTkButton(
+        home_button = ctk.CTkButton(
             self,
-            text="ホームへ戻る",
+            text="🏠 ホームへ戻る",
+            width=280,
+            height=45,
+            corner_radius=15,
+            fg_color="#607D8B",
+            hover_color="#455A64",
+            font=("Hiragino Sans", 14, "bold"),
             command=self.master.show_home
-        ).pack(pady=10)
+        )
 
-    def get_advice(self):
+        home_button.pack(
+            pady=(5, 15)
+        )
+
+        # ==========================
+        # 健康データを表示
+        # ==========================
+
+        self.show_health_data()
+
+    # ==================================================
+    # 健康データを表示
+    # ==================================================
+
+    def show_health_data(self):
 
         profile = load_profile()
 
-        height = float(profile[3])
-        weight = float(profile[4])
+        exercise = load_exercise()
 
-        bmi = round(weight / ((height / 100) ** 2), 1)
+        # ==========================
+        # BMI
+        # ==========================
+
+        bmi_text = "未登録"
+
+        if profile:
+
+            try:
+
+                height = float(profile[3])
+                weight = float(profile[4])
+
+                if height > 0:
+
+                    bmi = round(
+                        weight / ((height / 100) ** 2),
+                        1
+                    )
+
+                    bmi_text = str(bmi)
+
+            except (ValueError, IndexError, TypeError):
+
+                bmi_text = "計算できません"
+
+        # ==========================
+        # 運動記録
+        # ==========================
+
+        walk_text = "未登録"
+        other_text = "未登録"
+
+        if exercise is not None and not exercise.empty:
+
+            try:
+
+                latest = exercise.iloc[-1]
+
+                walk_text = str(
+                    latest["徒歩(分)"]
+                )
+
+                other_text = str(
+                    latest["その他の運動"]
+                )
+
+            except (KeyError, IndexError):
+
+                pass
+
+        # ==========================
+        # 表示
+        # ==========================
+
+        data_text = (
+            f"📊 BMI：{bmi_text}\n\n"
+            f"🚶 最新の徒歩時間：{walk_text} 分\n\n"
+            f"🏃 その他の運動：{other_text}"
+        )
+
+        self.data_label.configure(
+            text=data_text
+        )
+
+    # ==================================================
+    # Geminiから健康アドバイスを取得
+    # ==================================================
+
+    def get_advice(self):
+
+        # 最新の健康データを取得
+        profile = load_profile()
+
+        if not profile:
+
+            self.textbox.delete(
+                "1.0",
+                "end"
+            )
+
+            self.textbox.insert(
+                "1.0",
+                "⚠ プロフィールが登録されていません。\n\n"
+                "先にプロフィール画面から\n"
+                "身長と体重を登録してください。"
+            )
+
+            return
+
+        # ==========================
+        # BMIを計算
+        # ==========================
+
+        try:
+
+            height = float(
+                profile[3]
+            )
+
+            weight = float(
+                profile[4]
+            )
+
+            bmi = round(
+                weight / ((height / 100) ** 2),
+                1
+            )
+
+        except (ValueError, IndexError, TypeError, ZeroDivisionError):
+
+            self.textbox.delete(
+                "1.0",
+                "end"
+            )
+
+            self.textbox.insert(
+                "1.0",
+                "⚠ 身長または体重のデータが正しくありません。"
+            )
+
+            return
+
+        # ==========================
+        # 運動記録を取得
+        # ==========================
 
         exercise = load_exercise()
 
-        latest = exercise.iloc[-1]
+        if exercise is None or exercise.empty:
 
-        walk = latest["徒歩(分)"]
-        other = latest["その他の運動"]
+            walk = "記録なし"
+            other = "記録なし"
+
+        else:
+
+            try:
+
+                latest = exercise.iloc[-1]
+
+                walk = latest["徒歩(分)"]
+
+                other = latest["その他の運動"]
+
+            except (KeyError, IndexError):
+
+                walk = "記録なし"
+                other = "記録なし"
+
+        # ==========================
+        # Geminiへ送る文章
+        # ==========================
 
         prompt = f"""
+    ```
+
     あなたは管理栄養士です。
 
-    BMIは{bmi}
+    以下はユーザーの健康記録です。
 
-    徒歩時間は{walk}分
+    BMI：{bmi}
 
-    その他の運動
+    徒歩時間：{walk}分
 
+    その他の運動：
     {other}
 
-    最初の挨拶を省略し、
-    生活習慣病予防のための
-    アドバイスを箇条書きで、高校生でもわかるような文で何個か出してください
-    また、改行を入れて読みやすいようにしてください
-    ですます調にして丁寧な言葉遣いを心がけてください。
+    この健康記録を参考にして、
+    生活習慣病予防のためのアドバイスを作成してください。
+
+    最初の挨拶は省略してください。
+
+    高校生でも理解できるような、
+    わかりやすい文章にしてください。
+
+    アドバイスは箇条書きで何個か出してください。
+
+    それぞれのアドバイスの間には
+    改行を入れて読みやすくしてください。
+
+    ですます調で、丁寧な言葉遣いを心がけてください。
+
+    医療行為や診断をするのではなく、
+    日常生活で取り組める一般的な健康アドバイスをしてください。
     """
 
-        advice = get_health_advice(prompt)
 
-        self.textbox.delete("1.0", "end")
+        # ==========================
+        # Geminiから回答を取得
+        # ==========================
 
-        self.textbox.insert("1.0", advice)
+        self.textbox.delete(
+            "1.0",
+            "end"
+        )
+
+        self.textbox.insert(
+            "1.0",
+            "🤖 Geminiが健康記録を分析しています...\n\n"
+            "少しお待ちください。"
+        )
+
+        self.update()
+
+        try:
+
+            advice = get_health_advice(
+                prompt
+            )
+
+            # ==========================
+            # アドバイス表示
+            # ==========================
+
+            self.textbox.delete(
+                "1.0",
+                "end"
+            )
+
+            self.textbox.insert(
+                "1.0",
+                advice
+            )
+
+            # 健康データ表示も更新
+            self.show_health_data()
+
+        except Exception as e:
+
+            self.textbox.delete(
+                "1.0",
+                "end"
+            )
+
+            self.textbox.insert(
+                "1.0",
+                "⚠ アドバイスの取得中にエラーが発生しました。\n\n"
+                f"エラー内容：\n{e}"
+            )
+
