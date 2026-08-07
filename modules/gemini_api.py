@@ -18,4 +18,5 @@ def get_health_advice(prompt):
         return response.text
 
     else:#apiのkeyがない時のアドバイスも書いておく
-        return "こんにちは"
+
+        return ""

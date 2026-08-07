@@ -4,6 +4,7 @@ from modules.home import HomeFrame
 from modules.profile import ProfileFrame
 #7月17日追加
 from modules.exercise import ExerciseFrame
+from modules.exercise_graph import ExerciseGraphFrame
 from modules.advice import AdviceFrame
 
 ctk.set_appearance_mode("Light")
@@ -38,6 +39,9 @@ class App(ctk.CTk):
     #7月17日追加
     def show_exercise(self):
         self.change_frame(ExerciseFrame)
+
+    def show_exercise_graph(self):
+        self.change_frame(ExerciseGraphFrame)
 
     #7月27日追加
     def show_advice(self):
