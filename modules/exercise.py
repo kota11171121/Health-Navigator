@@ -298,10 +298,7 @@ class ExerciseFrame(ctk.CTkFrame):
 
         if walk_value < 0:
 
-            messagebox.showwarning(
-                "入力確認",
-                "徒歩時間は0以上で入力してください。"
-            )
+            messagebox.showwarning("入力確認","徒歩時間は0以上で入力してください。")
 
             return
 
@@ -315,19 +312,9 @@ class ExerciseFrame(ctk.CTkFrame):
             other
         )
 
-        messagebox.showinfo(
-            "保存完了",
-            "運動記録を保存しました。"
-        )
+        messagebox.showinfo("保存完了","運動記録を保存しました。")
 
-        # 入力欄をクリア
-        self.walk_entry.delete(
-            0,
-            "end"
-        )
+        self.walk_entry.delete(0,"end")
 
-        self.other_text.delete(
-            "1.0",
-            "end"
-        )
+        self.other_text.delete("1.0","end")
 

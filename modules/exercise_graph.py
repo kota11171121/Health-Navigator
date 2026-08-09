@@ -16,9 +16,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
 
         self.master = master
 
-        # ==========================================
-        # 画面全体
-        # ==========================================
 
         self.configure(
             fg_color="#EAF6FF"
@@ -31,9 +28,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             pady=20
         )
 
-        # ==========================================
-        # タイトル
-        # ==========================================
 
         title = ctk.CTkLabel(
             self,
@@ -57,9 +51,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             pady=(0, 20)
         )
 
-        # ==========================================
-        # 説明カード
-        # ==========================================
 
         info_card = ctk.CTkFrame(
             self,
@@ -107,9 +98,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             pady=(0, 15)
         )
 
-        # ==========================================
-        # グラフカード
-        # ==========================================
 
         graph_card = ctk.CTkFrame(
             self,
@@ -139,9 +127,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             pady=(15, 5)
         )
 
-        # ==========================================
-        # グラフ表示エリア
-        # ==========================================
 
         self.graph_area = ctk.CTkFrame(
             graph_card,
@@ -155,9 +140,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             pady=10
         )
 
-        # ==========================================
-        # ホームへ戻る
-        # ==========================================
 
         home_button = ctk.CTkButton(
             self,
@@ -179,9 +161,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             pady=(10, 15)
         )
 
-        # ==========================================
-        # グラフ表示
-        # ==========================================
 
         self.show_graph()
 
@@ -192,10 +171,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
     def show_graph(self):
 
         df = load_exercise()
-
-        # ------------------------------------------
-        # データがない場合
-        # ------------------------------------------
 
         if df is None:
 
@@ -209,9 +184,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
 
             return
 
-        # ------------------------------------------
-        # 必要な列があるか確認
-        # ------------------------------------------
 
         if "日付" not in df.columns:
 
@@ -225,27 +197,17 @@ class ExerciseGraphFrame(ctk.CTkFrame):
 
             return
 
-        # ------------------------------------------
-        # 日付を変換
-        # ------------------------------------------
 
         df["日付"] = pd.to_datetime(
             df["日付"],
             errors="coerce"
         )
 
-        # ------------------------------------------
-        # 徒歩時間を数値に変換
-        # ------------------------------------------
-
         df["徒歩(分)"] = pd.to_numeric(
             df["徒歩(分)"],
             errors="coerce"
         )
 
-        # ------------------------------------------
-        # 不正なデータを削除
-        # ------------------------------------------
 
         df = df.dropna(
             subset=[
@@ -260,18 +222,11 @@ class ExerciseGraphFrame(ctk.CTkFrame):
 
             return
 
-        # ------------------------------------------
-        # 日付順に並べ替え
-        # ------------------------------------------
-
         df = df.sort_values(
             "日付"
         )
 
-        # ------------------------------------------
-        # グラフ作成
-        # ------------------------------------------
-
+    
         fig = plt.Figure(
             figsize=(7, 4),
             dpi=100
@@ -285,9 +240,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             marker="o"
         )
 
-        # ------------------------------------------
-        # グラフ設定
-        # ------------------------------------------
 
         #ax.set_title(
             #""
@@ -308,9 +260,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
 
         fig.autofmt_xdate()
 
-        # ------------------------------------------
-        # グラフをTkinterに表示
-        # ------------------------------------------
 
         self.canvas = FigureCanvasTkAgg(
             fig,
@@ -325,10 +274,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             padx=10,
             pady=10
         )
-
-    # ==========================================
-    # データがない場合
-    # ==========================================
 
     def show_no_data(self):
 
