@@ -1,4 +1,6 @@
 import customtkinter as ctk
+from tkinter import messagebox
+
 from modules.csv_manager import save_profile, load_profile
 
 class ProfileFrame(ctk.CTkFrame):
@@ -9,9 +11,9 @@ class ProfileFrame(ctk.CTkFrame):
 
         self.master = master
 
-        # ==========================
+        # ==========================================
         # 画面全体
-        # ==========================
+        # ==========================================
 
         self.configure(
             fg_color="#EAF6FF"
@@ -24,51 +26,101 @@ class ProfileFrame(ctk.CTkFrame):
             pady=20
         )
 
-        # ==========================
+        # ==========================================
         # タイトル
-        # ==========================
+        # ==========================================
 
         title = ctk.CTkLabel(
             self,
-            text="👤 プロフィール",
-            font=("Hiragino Sans", 30, "bold")
+            text="👤 プロフィール入力",
+            font=("Hiragino Sans", 28, "bold"),
+            text_color="#222222"
         )
 
         title.pack(
-            pady=(10, 5)
+            pady=(20, 5)
         )
 
         subtitle = ctk.CTkLabel(
             self,
-            text="基本情報を登録・変更します",
-            font=("Hiragino Sans", 14)
+            text="あなたの基本情報を登録します",
+            font=("Hiragino Sans", 14),
+            text_color="#666666"
         )
 
         subtitle.pack(
             pady=(0, 20)
         )
 
-        # ==========================
-        # 入力欄を入れるカード
-        # ==========================
+        # ==========================================
+        # 注意・説明カード
+        # ==========================================
 
-        input_card = ctk.CTkFrame(
+        info_card = ctk.CTkFrame(
             self,
             corner_radius=18,
+            fg_color="#FFFFFF",
             border_width=1,
-            border_color="#D8D8D8",
-            fg_color="white"
+            border_color="#D8D8D8"
         )
 
-        input_card.pack(
+        info_card.pack(
             fill="x",
             padx=20,
-            pady=10
+            pady=(0, 15)
         )
 
-        # ==========================
-        # 入力項目
-        # ==========================
+        info_title = ctk.CTkLabel(
+            info_card,
+            text="💡 この機能について",
+            font=("Hiragino Sans", 16, "bold"),
+            text_color="#222222"
+        )
+
+        info_title.pack(
+            anchor="w",
+            padx=20,
+            pady=(15, 5)
+        )
+
+        info_text = ctk.CTkLabel(
+            info_card,
+            text=(
+                "名前・年齢・性別・身長・体重などの\n"
+                "基本情報を登録することができます。\n\n"
+                "登録した身長と体重は、BMIの計算や\n"
+                "健康アドバイスに利用されます。"
+            ),
+            font=("Hiragino Sans", 12),
+            text_color="#666666",
+            justify="left",
+            anchor="w"
+        )
+
+        info_text.pack(
+            fill="x",
+            padx=20,
+            pady=(0, 15)
+        )
+
+        # ==========================================
+        # 入力フォームカード
+        # ==========================================
+
+        form_card = ctk.CTkFrame(
+            self,
+            corner_radius=18,
+            fg_color="#FFFFFF",
+            border_width=1,
+            border_color="#D8D8D8"
+        )
+
+        form_card.pack(
+            fill="both",
+            expand=True,
+            padx=20,
+            pady=5
+        )
 
         self.entries = {}
 
@@ -80,38 +132,41 @@ class ProfileFrame(ctk.CTkFrame):
             "体重(kg)"
         ]
 
+        # ==========================================
+        # 入力欄
+        # ==========================================
+
         for item in items:
 
-            # 1つの項目をまとめるフレーム
-            frame = ctk.CTkFrame(
-                input_card,
+            row = ctk.CTkFrame(
+                form_card,
                 fg_color="transparent"
             )
 
-            frame.pack(
+            row.pack(
                 fill="x",
                 padx=25,
                 pady=7
             )
 
-            # 項目名
             label = ctk.CTkLabel(
-                frame,
+                row,
                 text=item,
                 width=110,
                 anchor="w",
-                font=("Hiragino Sans", 14, "bold")
+                font=("Hiragino Sans", 13, "bold"),
+                text_color="#333333"
             )
 
             label.pack(
                 side="left"
             )
 
-            # 入力欄
             entry = ctk.CTkEntry(
-                frame,
-                height=40,
-                font=("Hiragino Sans", 14)
+                row,
+                height=38,
+                corner_radius=10,
+                font=("Hiragino Sans", 13)
             )
 
             entry.pack(
@@ -123,70 +178,58 @@ class ProfileFrame(ctk.CTkFrame):
 
             self.entries[item] = entry
 
-        # ==========================
-        # BMI表示
-        # ==========================
-
-        self.bmi_label = ctk.CTkLabel(
-            input_card,
-            text="BMI：--",
-            font=("Hiragino Sans", 16, "bold"),
-            text_color="#2196F3"
-        )
-
-        self.bmi_label.pack(
-            pady=(10, 20)
-        )
-
-        # ==========================
+        # ==========================================
         # 保存ボタン
-        # ==========================
+        # ==========================================
 
         save_button = ctk.CTkButton(
             self,
-            text="💾 保存",
-            width=280,
-            height=50,
-            corner_radius=15,
-            fg_color="#4CAF50",
-            hover_color="#388E3C",
-            font=("Hiragino Sans", 16, "bold"),
+            text="💾  保存する",
+            height=45,
+            corner_radius=14,
+            font=("Hiragino Sans", 15, "bold"),
             command=self.save
         )
 
         save_button.pack(
-            pady=(20, 10)
+            fill="x",
+            padx=40,
+            pady=(15, 8)
         )
 
-        # ==========================
-        # ホームへ戻るボタン
-        # ==========================
+        # ==========================================
+        # ホームへ戻る
+        # ==========================================
 
         home_button = ctk.CTkButton(
             self,
-            text="🏠 ホームへ戻る",
-            width=280,
-            height=45,
-            corner_radius=15,
-            fg_color="#607D8B",
-            hover_color="#455A64",
-            font=("Hiragino Sans", 14, "bold"),
+            text="⌂  ホームへ戻る",
+            height=40,
+            corner_radius=12,
+            fg_color="#FFFFFF",
+            hover_color="#F0F0F0",
+            text_color="#333333",
+            border_width=1,
+            border_color="#D0D0D0",
+            font=("Hiragino Sans", 13),
             command=self.master.show_home
         )
 
         home_button.pack(
-            pady=(0, 20)
+            fill="x",
+            padx=40,
+            pady=(0, 15)
         )
 
-        # ==========================
-        # 保存済みデータを読み込む
-        # ==========================
+        # ==========================================
+        # 保存されているプロフィールを読み込む
+        # ==========================================
 
         self.load()
 
-    # ==================================================
-    # プロフィールを保存
-    # ==================================================
+    # ==========================================
+    # プロフィール保存
+    # ==========================================
 
     def save(self):
 
@@ -198,45 +241,96 @@ class ProfileFrame(ctk.CTkFrame):
             self.entries["体重(kg)"].get()
         ]
 
-        # CSVへ保存
-        save_profile(data)
+        # ======================================
+        # 入力チェック
+        # ======================================
 
-        # BMIを計算
+        if not data[0]:
+
+            messagebox.showwarning(
+                "入力確認",
+                "名前を入力してください。"
+            )
+
+            return
+
+        if not data[1]:
+
+            messagebox.showwarning(
+                "入力確認",
+                "年齢を入力してください。"
+            )
+
+            return
+
+        if not data[2]:
+
+            messagebox.showwarning(
+                "入力確認",
+                "性別を入力してください。"
+            )
+
+            return
+
+        if not data[3]:
+
+            messagebox.showwarning(
+                "入力確認",
+                "身長を入力してください。"
+            )
+
+            return
+
+        if not data[4]:
+
+            messagebox.showwarning(
+                "入力確認",
+                "体重を入力してください。"
+            )
+
+            return
+
+        # ======================================
+        # 身長・体重の数値チェック
+        # ======================================
+
         try:
 
-            height = float(
-                self.entries["身長(cm)"].get()
+            height = float(data[3])
+            weight = float(data[4])
+
+        except ValueError:
+
+            messagebox.showwarning(
+                "入力確認",
+                "身長と体重は数字で入力してください。"
             )
 
-            weight = float(
-                self.entries["体重(kg)"].get()
+            return
+
+        if height <= 0 or weight <= 0:
+
+            messagebox.showwarning(
+                "入力確認",
+                "身長と体重には0より大きい数字を入力してください。"
             )
 
-            if height <= 0 or weight <= 0:
-                raise ValueError
+            return
 
-            bmi = weight / ((height / 100) ** 2)
+        # ======================================
+        # 保存
+        # ======================================
 
-            bmi = round(
-                bmi,
-                1
-            )
+        save_profile(data)
 
-            self.bmi_label.configure(
-                text=f"BMI：{bmi}",
-                text_color="#2196F3"
-            )
+        messagebox.showinfo(
+            "保存完了",
+            "プロフィールを保存しました。"
+        )
 
-        except (ValueError, ZeroDivisionError):
-
-            self.bmi_label.configure(
-                text="BMI：身長・体重を正しく入力してください",
-                text_color="#F44336"
-            )
-
-    # ==================================================
-    # 保存済みプロフィールを読み込む
-    # ==================================================
+    # ==========================================
+    # プロフィール読み込み
+    # ==========================================
 
     def load(self):
 
@@ -263,36 +357,3 @@ class ProfileFrame(ctk.CTkFrame):
                     0,
                     value
                 )
-
-            # 読み込んだデータからBMIを計算
-            try:
-
-                height = float(
-                    self.entries["身長(cm)"].get()
-                )
-
-                weight = float(
-                    self.entries["体重(kg)"].get()
-                )
-
-                if height > 0 and weight > 0:
-
-                    bmi = weight / ((height / 100) ** 2)
-
-                    bmi = round(
-                        bmi,
-                        1
-                    )
-
-                    self.bmi_label.configure(
-                        text=f"BMI：{bmi}",
-                        text_color="#2196F3"
-                    )
-
-            except (ValueError, ZeroDivisionError):
-
-                pass
-
-
-
-        
