@@ -8,9 +8,6 @@ class HomeFrame(ctk.CTkFrame):
 
         self.master = master
 
-        # ==========================================
-        # 画面全体
-        # ==========================================
 
         self.configure(
             fg_color="#EAF6FF"
@@ -21,9 +18,6 @@ class HomeFrame(ctk.CTkFrame):
             expand=True
         )
 
-        # ==========================================
-        # タイトル
-        # ==========================================
 
         title = ctk.CTkLabel(
             self,
@@ -45,9 +39,6 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 20)
         )
 
-        # ==========================================
-        # プロフィール
-        # ==========================================
 
         profile_card = ctk.CTkFrame(
             self,
@@ -96,9 +87,6 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 10)
         )
 
-        # ==========================================
-        # 運動記録
-        # ==========================================
 
         exercise_card = ctk.CTkFrame(
             self,
@@ -147,9 +135,6 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 10)
         )
 
-        # ==========================================
-        # 運動記録のグラフ
-        # ==========================================
 
         graph_card = ctk.CTkFrame(
             self,
@@ -198,9 +183,6 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 10)
         )
 
-        # ==========================================
-        # 健康アドバイス
-        # ==========================================
 
         advice_card = ctk.CTkFrame(
             self,
@@ -249,33 +231,21 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 10)
         )
 
-    # ==========================================
-    # プロフィール
-    # ==========================================
 
     def open_profile(self):
 
         self.master.show_profile()
 
-    # ==========================================
-    # 運動記録
-    # ==========================================
 
     def open_exercise(self):
 
         self.master.show_exercise()
 
-    # ==========================================
-    # 運動記録グラフ
-    # ==========================================
 
     def open_exercise_graph(self):
 
         self.master.show_exercise_graph()
 
-    # ==========================================
-    # 健康アドバイス
-    # ==========================================
 
     def open_advice(self):
 

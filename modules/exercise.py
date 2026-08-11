@@ -13,9 +13,6 @@ class ExerciseFrame(ctk.CTkFrame):
 
         self.master = master
 
-        # ==========================================
-        # 画面全体
-        # ==========================================
 
         self.configure(
             fg_color="#EAF6FF"
@@ -28,9 +25,6 @@ class ExerciseFrame(ctk.CTkFrame):
             pady=20
         )
 
-        # ==========================================
-        # タイトル
-        # ==========================================
 
         title = ctk.CTkLabel(
             self,
@@ -54,9 +48,6 @@ class ExerciseFrame(ctk.CTkFrame):
             pady=(0, 20)
         )
 
-        # ==========================================
-        # この機能について
-        # ==========================================
 
         info_card = ctk.CTkFrame(
             self,
@@ -104,9 +95,6 @@ class ExerciseFrame(ctk.CTkFrame):
             pady=(0, 15)
         )
 
-        # ==========================================
-        # 入力フォーム
-        # ==========================================
 
         form_card = ctk.CTkFrame(
             self,
@@ -122,9 +110,6 @@ class ExerciseFrame(ctk.CTkFrame):
             pady=5
         )
 
-        # ==========================================
-        # 日付
-        # ==========================================
 
         date_label = ctk.CTkLabel(
             form_card,
@@ -152,9 +137,6 @@ class ExerciseFrame(ctk.CTkFrame):
             anchor="w"
         )
 
-        # ==========================================
-        # 徒歩時間
-        # ==========================================
 
         walk_label = ctk.CTkLabel(
             form_card,
@@ -184,9 +166,6 @@ class ExerciseFrame(ctk.CTkFrame):
             anchor="w"
         )
 
-        # ==========================================
-        # その他の運動
-        # ==========================================
 
         other_label = ctk.CTkLabel(
             form_card,
@@ -215,9 +194,6 @@ class ExerciseFrame(ctk.CTkFrame):
             anchor="w"
         )
 
-        # ==========================================
-        # 保存ボタン
-        # ==========================================
 
         save_button = ctk.CTkButton(
             self,
@@ -233,10 +209,6 @@ class ExerciseFrame(ctk.CTkFrame):
             padx=40,
             pady=(15, 8)
         )
-
-        # ==========================================
-        # ホームへ戻る
-        # ==========================================
 
         home_button = ctk.CTkButton(
             self,
@@ -258,9 +230,6 @@ class ExerciseFrame(ctk.CTkFrame):
             pady=(0, 15)
         )
 
-    # ==========================================
-    # 保存
-    # ==========================================
 
     def save(self):
 
@@ -275,9 +244,6 @@ class ExerciseFrame(ctk.CTkFrame):
             "end"
         ).strip()
 
-        # ======================================
-        # 徒歩時間チェック
-        # ======================================
 
         if not walk:
 
@@ -302,9 +268,6 @@ class ExerciseFrame(ctk.CTkFrame):
 
             return
 
-        # ======================================
-        # 保存
-        # ======================================
 
         save_exercise(
             date,

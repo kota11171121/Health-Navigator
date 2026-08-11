@@ -13,9 +13,6 @@ class AdviceFrame(ctk.CTkFrame):
 
         self.master = master
 
-        # ==========================
-        # 画面全体
-        # ==========================
 
         self.configure(
             fg_color="#EAF6FF"
@@ -28,9 +25,6 @@ class AdviceFrame(ctk.CTkFrame):
             pady=20
         )
 
-        # ==========================
-        # タイトル
-        # ==========================
 
         title = ctk.CTkLabel(
             self,
@@ -52,9 +46,6 @@ class AdviceFrame(ctk.CTkFrame):
             pady=(0, 15)
         )
 
-        # ==========================
-        # 健康データカード
-        # ==========================
 
         data_card = ctk.CTkFrame(
             self,
@@ -83,9 +74,6 @@ class AdviceFrame(ctk.CTkFrame):
             pady=(15, 10)
         )
 
-        # ==========================
-        # データ表示
-        # ==========================
 
         self.data_label = ctk.CTkLabel(
             data_card,
@@ -101,9 +89,6 @@ class AdviceFrame(ctk.CTkFrame):
             pady=(0, 20)
         )
 
-        # ==========================
-        # アドバイス取得ボタン
-        # ==========================
 
         advice_button = ctk.CTkButton(
             self,
@@ -121,9 +106,6 @@ class AdviceFrame(ctk.CTkFrame):
             pady=(15, 10)
         )
 
-        # ==========================
-        # アドバイス表示カード
-        # ==========================
 
         advice_card = ctk.CTkFrame(
             self,
@@ -167,9 +149,6 @@ class AdviceFrame(ctk.CTkFrame):
             pady=(0, 15)
         )
 
-        # ==========================
-        # ホームへ戻るボタン
-        # ==========================
 
         home_button = ctk.CTkButton(
             self,
@@ -187,15 +166,9 @@ class AdviceFrame(ctk.CTkFrame):
             pady=(5, 15)
         )
 
-        # ==========================
-        # 健康データを表示
-        # ==========================
 
         self.show_health_data()
 
-    # ==================================================
-    # 健康データを表示
-    # ==================================================
 
     def show_health_data(self):
 
@@ -203,9 +176,6 @@ class AdviceFrame(ctk.CTkFrame):
 
         exercise = load_exercise()
 
-        # ==========================
-        # BMI
-        # ==========================
 
         bmi_text = "未登録"
 
@@ -229,9 +199,6 @@ class AdviceFrame(ctk.CTkFrame):
 
                 bmi_text = "計算できません"
 
-        # ==========================
-        # 運動記録
-        # ==========================
 
         walk_text = "未登録"
         other_text = "未登録"
@@ -254,9 +221,6 @@ class AdviceFrame(ctk.CTkFrame):
 
                 pass
 
-        # ==========================
-        # 表示
-        # ==========================
 
         data_text = (
             f"📊 BMI：{bmi_text}\n\n"
@@ -268,9 +232,6 @@ class AdviceFrame(ctk.CTkFrame):
             text=data_text
         )
 
-    # ==================================================
-    # Geminiから健康アドバイスを取得
-    # ==================================================
 
     def get_advice(self):
 
@@ -293,9 +254,6 @@ class AdviceFrame(ctk.CTkFrame):
 
             return
 
-        # ==========================
-        # BMIを計算
-        # ==========================
 
         try:
 
@@ -326,9 +284,6 @@ class AdviceFrame(ctk.CTkFrame):
 
             return
 
-        # ==========================
-        # 運動記録を取得
-        # ==========================
 
         exercise = load_exercise()
 
@@ -352,9 +307,6 @@ class AdviceFrame(ctk.CTkFrame):
                 walk = "記録なし"
                 other = "記録なし"
 
-        # ==========================
-        # Geminiへ送る文章
-        # ==========================
 
         prompt = f"""
     ```
@@ -390,10 +342,6 @@ class AdviceFrame(ctk.CTkFrame):
     """
 
 
-        # ==========================
-        # Geminiから回答を取得
-        # ==========================
-
         self.textbox.delete(
             "1.0",
             "end"
@@ -413,9 +361,6 @@ class AdviceFrame(ctk.CTkFrame):
                 prompt
             )
 
-            # ==========================
-            # アドバイス表示
-            # ==========================
 
             self.textbox.delete(
                 "1.0",
@@ -427,7 +372,6 @@ class AdviceFrame(ctk.CTkFrame):
                 advice
             )
 
-            # 健康データ表示も更新
             self.show_health_data()
 
         except Exception as e:
