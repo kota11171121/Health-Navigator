@@ -21,7 +21,7 @@ class HomeFrame(ctk.CTkFrame):
 
         title = ctk.CTkLabel(
             self,
-            text="🩺 健康管理アプリ",
+            text="🩺 ヘルスナビゲーター",
             font=("Hiragino Sans", 32, "bold")
         )
 
@@ -31,7 +31,7 @@ class HomeFrame(ctk.CTkFrame):
 
         subtitle = ctk.CTkLabel(
             self,
-            text="Lifestyle Disease Prevention",
+            text="健康管理アプリ",
             font=("Hiragino Sans", 15)
         )
 
