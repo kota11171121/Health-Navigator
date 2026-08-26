@@ -1,4 +1,6 @@
 import customtkinter as ctk
+from modules.gemini_api import api_key
+
 
 class HomeFrame(ctk.CTkFrame):
 
@@ -7,7 +9,6 @@ class HomeFrame(ctk.CTkFrame):
         super().__init__(master)
 
         self.master = master
-
 
         self.configure(
             fg_color="#EAF6FF"
@@ -18,6 +19,9 @@ class HomeFrame(ctk.CTkFrame):
             expand=True
         )
 
+        # ==========================
+        # タイトル
+        # ==========================
 
         title = ctk.CTkLabel(
             self,
@@ -39,6 +43,9 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 20)
         )
 
+        # ==========================
+        # プロフィールカード
+        # ==========================
 
         profile_card = ctk.CTkFrame(
             self,
@@ -87,6 +94,9 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 10)
         )
 
+        # ==========================
+        # 運動記録カード
+        # ==========================
 
         exercise_card = ctk.CTkFrame(
             self,
@@ -135,6 +145,9 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 10)
         )
 
+        # ==========================
+        # 運動記録グラフカード
+        # ==========================
 
         graph_card = ctk.CTkFrame(
             self,
@@ -183,6 +196,9 @@ class HomeFrame(ctk.CTkFrame):
             pady=(0, 10)
         )
 
+        # ==========================
+        # 健康アドバイスカード
+        # ==========================
 
         advice_card = ctk.CTkFrame(
             self,
@@ -217,9 +233,22 @@ class HomeFrame(ctk.CTkFrame):
             pady=(10, 2)
         )
 
+        # ==========================
+        # APIキーによって説明文を変更
+        # ==========================
+
+        if api_key != "":
+            advice_text = "AIが生活改善を提案"
+        else:
+            advice_text = "日々のデータからアドバイスを生成"
+
+        # ==========================
+        # 健康アドバイスの説明文
+        # ==========================
+
         advice_description = ctk.CTkLabel(
             advice_card,
-            text="AIが生活改善を提案",
+            text=advice_text,
             font=("Hiragino Sans", 12),
             text_color="gray40",
             anchor="w"
@@ -232,20 +261,36 @@ class HomeFrame(ctk.CTkFrame):
         )
 
 
+    # ==========================
+    # プロフィール画面へ
+    # ==========================
+
     def open_profile(self):
 
         self.master.show_profile()
 
+
+    # ==========================
+    # 運動記録画面へ
+    # ==========================
 
     def open_exercise(self):
 
         self.master.show_exercise()
 
 
+    # ==========================
+    # 運動記録グラフ画面へ
+    # ==========================
+
     def open_exercise_graph(self):
 
         self.master.show_exercise_graph()
 
+
+    # ==========================
+    # 健康アドバイス画面へ
+    # ==========================
 
     def open_advice(self):
 
