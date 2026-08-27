@@ -10,6 +10,14 @@ PCでの使用を前提としたデスクトップアプリ<br>
 
 pythonで開発<br>
 
+__個別にダウンロードが必要なライブラリ__<br>
+
+customtkinter<br>
+pandas<br>
+matplotlib<br>
+google-genai<br>
+tkcalendar<br>
+
 
 # アプリ作成の動機
 
