@@ -124,7 +124,7 @@ class AdviceFrame(ctk.CTkFrame):
 
         advice_title = ctk.CTkLabel(
             advice_card,
-            text="💡 Geminiからの健康アドバイス",
+            text="💡 AIからの健康アドバイス",
             font=("Hiragino Sans", 18, "bold"),
             text_color="#2196F3"
         )
@@ -351,7 +351,7 @@ class AdviceFrame(ctk.CTkFrame):
 
         self.textbox.insert(
             "1.0",
-            "🤖 Geminiが健康記録を分析しています...\n\n"
+            "🤖 AIが健康記録を分析しています...\n\n"
             "少しお待ちください。"
         )
 

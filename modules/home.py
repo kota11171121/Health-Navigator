@@ -35,7 +35,7 @@ class HomeFrame(ctk.CTkFrame):
 
         subtitle = ctk.CTkLabel(
             self,
-            text="健康管理アプリ",
+            text="自分だけの健康管理ができるアプリ",
             font=("Hiragino Sans", 15)
         )
 
@@ -82,7 +82,7 @@ class HomeFrame(ctk.CTkFrame):
 
         profile_description = ctk.CTkLabel(
             profile_card,
-            text="基本情報を登録する",
+            text="基本情報を登録",
             font=("Hiragino Sans", 12),
             text_color="gray40",
             anchor="w"
@@ -133,7 +133,7 @@ class HomeFrame(ctk.CTkFrame):
 
         exercise_description = ctk.CTkLabel(
             exercise_card,
-            text="毎日の運動を記録する",
+            text="毎日の運動を記録",
             font=("Hiragino Sans", 12),
             text_color="gray40",
             anchor="w"
@@ -184,7 +184,7 @@ class HomeFrame(ctk.CTkFrame):
 
         graph_description = ctk.CTkLabel(
             graph_card,
-            text="記録した運動量をグラフで確認する",
+            text="記録した運動量をグラフで確認",
             font=("Hiragino Sans", 12),
             text_color="gray40",
             anchor="w"
