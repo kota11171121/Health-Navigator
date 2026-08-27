@@ -8,7 +8,9 @@ PCでの使用を前提としたデスクトップアプリ<br>
 
 # アプリの使用技術
 
-pythonで開発<br>
+開発言語 Python<br>
+
+開発環境 Visual Studio Code<br>
 
 __個別にダウンロードが必要なライブラリ__<br>
 
