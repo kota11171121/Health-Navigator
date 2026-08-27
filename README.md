@@ -1,4 +1,4 @@
-__Health Navigator__
+# Health Navigator
 
 # アプリ作成の動機
 
