@@ -60,19 +60,14 @@ class ExerciseGraphFrame(ctk.CTkFrame):
 
     def show_graph(self):
 
-        print("===== グラフ読み込み開始 =====")
-
         for widget in self.graph_area.winfo_children():
             widget.destroy()
 
         try:
             df = load_exercise()
-            print("読み込んだデータ:")
-            print(df)
 
         except Exception as e:
 
-            print("CSV読み込みエラー:", e)
             self.status_label.configure(text="運動記録の読み込み中にエラーが発生しました")
             self.show_message(f"エラーが発生しました。\n\n{e}")
 
@@ -90,7 +85,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
             self.show_message("まだ運動記録がありません。")
 
             return
-        print("CSVの列名:", df.columns.tolist())
 
         if "日付" not in df.columns:
             self.status_label.configure(text="CSVの日付データが見つかりません")
@@ -109,9 +103,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
         df["徒歩(分)"] = pd.to_numeric(df["徒歩(分)"],errors="coerce")
 
         df = df.dropna(subset=["日付", "徒歩(分)"])
-
-        print("グラフに使用できるデータ:")
-        print(df)
 
         if df.empty:
             self.status_label.configure(text="グラフに使用できるデータがありません")
@@ -136,7 +127,6 @@ class ExerciseGraphFrame(ctk.CTkFrame):
         self.canvas.draw()
         canvas_widget = self.canvas.get_tk_widget()
         canvas_widget.pack(fill="both",expand=True)
-        print("===== グラフ表示完了 =====")
 
     def show_message(self, message):
         label = ctk.CTkLabel(

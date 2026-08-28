@@ -38,7 +38,6 @@ def get_health_advice(prompt):
             advice_list.append("・BMIは標準的な範囲です。現在の生活習慣を維持しましょう。")
 
         else:
-
             advice_list.append("・BMIが高めです。食事や運動の習慣を少しずつ見直してみましょう。")
 
         exercise = load_exercise()
@@ -53,7 +52,6 @@ def get_health_advice(prompt):
             average_walk = exercise["徒歩(分)"].mean()
 
         except (ValueError, TypeError):
-
             advice_list.append("・運動記録を正しく読み取れませんでした。")
 
             return "\n\n".join(advice_list)

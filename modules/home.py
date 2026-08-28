@@ -157,17 +157,13 @@ class HomeFrame(ctk.CTkFrame):
         advice_description.pack(fill="x",padx=25,pady=(0, 10))
 
     def open_profile(self):
-
         self.master.show_profile()
 
     def open_exercise(self):
-
         self.master.show_exercise()
 
     def open_exercise_graph(self):
-
         self.master.show_exercise_graph()
 
     def open_advice(self):
-
         self.master.show_advice()

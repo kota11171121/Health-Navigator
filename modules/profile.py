@@ -137,69 +137,54 @@ class ProfileFrame(ctk.CTkFrame):
             self.entries["身長(cm)"].get(),
             self.entries["体重(kg)"].get()]
 
-
         if not data[0]:
-
             messagebox.showwarning("入力確認","名前を入力してください。")
 
             return
 
         if not data[1]:
-
             messagebox.showwarning("入力確認","年齢を入力してください。")
 
             return
 
         if not data[2]:
-
             messagebox.showwarning("入力確認","性別を入力してください。")
 
             return
 
         if not data[3]:
-
             messagebox.showwarning("入力確認","身長を入力してください。")
 
             return
 
         if not data[4]:
-
             messagebox.showwarning("入力確認","体重を入力してください。")
 
             return
 
-
         try:
-
             height = float(data[3])
             weight = float(data[4])
 
         except ValueError:
-
             messagebox.showwarning("入力確認","身長と体重は数字で入力してください。")
 
             return
 
         if height <= 0 or weight <= 0:
-
             messagebox.showwarning("入力確認","身長と体重には0より大きい数字を入力してください。")
 
             return
 
-
         save_profile(data)
-
         messagebox.showinfo("保存完了","プロフィールを保存しました。")
-
 
     def load(self):
 
         data = load_profile()
 
         if data:
-
             keys = ["名前","年齢","性別","身長(cm)","体重(kg)"]
-
             for key, value in zip(keys, data):
 
                 self.entries[key].delete(0,"end")

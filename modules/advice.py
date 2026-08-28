@@ -81,7 +81,7 @@ class AdviceFrame(ctk.CTkFrame):
 
         advice_title = ctk.CTkLabel(
             advice_card,
-            text="💡 AIからの健康アドバイス",
+            text="💡 健康アドバイス",
             font=("Hiragino Sans", 18, "bold"),
             text_color="#2196F3")
 
