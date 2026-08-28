@@ -10,56 +10,26 @@ class HomeFrame(ctk.CTkFrame):
 
         self.master = master
 
-        self.configure(
-            fg_color="#EAF6FF"
-        )
+        self.configure(fg_color="#EAF6FF")
 
-        self.pack(
-            fill="both",
-            expand=True
-        )
+        self.pack(fill="both",expand=True)
 
-        # ==========================
-        # タイトル
-        # ==========================
+        title = ctk.CTkLabel(self,text="🩺 ヘルスナビゲーター",font=("Hiragino Sans", 32, "bold"))
 
-        title = ctk.CTkLabel(
-            self,
-            text="🩺 ヘルスナビゲーター",
-            font=("Hiragino Sans", 32, "bold")
-        )
+        title.pack(pady=(25, 5))
 
-        title.pack(
-            pady=(25, 5)
-        )
+        subtitle = ctk.CTkLabel(self,text="自分だけの健康管理ができるアプリ",font=("Hiragino Sans", 15))
 
-        subtitle = ctk.CTkLabel(
-            self,
-            text="自分だけの健康管理ができるアプリ",
-            font=("Hiragino Sans", 15)
-        )
-
-        subtitle.pack(
-            pady=(0, 20)
-        )
-
-        # ==========================
-        # プロフィールカード
-        # ==========================
+        subtitle.pack(pady=(0, 20))
 
         profile_card = ctk.CTkFrame(
             self,
             corner_radius=18,
             fg_color="white",
             border_width=1,
-            border_color="#D8D8D8"
-        )
+            border_color="#D8D8D8")
 
-        profile_card.pack(
-            fill="x",
-            padx=40,
-            pady=8
-        )
+        profile_card.pack(fill="x",padx=40,pady=8)
 
         profile_button = ctk.CTkButton(
             profile_card,
@@ -71,46 +41,27 @@ class HomeFrame(ctk.CTkFrame):
             text_color="#222222",
             font=("Hiragino Sans", 16, "bold"),
             anchor="w",
-            command=self.open_profile
-        )
+            command=self.open_profile)
 
-        profile_button.pack(
-            fill="x",
-            padx=10,
-            pady=(10, 2)
-        )
+        profile_button.pack(fill="x",padx=10,pady=(10, 2))
 
         profile_description = ctk.CTkLabel(
             profile_card,
             text="基本情報を登録",
             font=("Hiragino Sans", 12),
             text_color="gray40",
-            anchor="w"
-        )
+            anchor="w")
 
-        profile_description.pack(
-            fill="x",
-            padx=25,
-            pady=(0, 10)
-        )
-
-        # ==========================
-        # 運動記録カード
-        # ==========================
+        profile_description.pack(fill="x",padx=25,pady=(0, 10))
 
         exercise_card = ctk.CTkFrame(
             self,
             corner_radius=18,
             fg_color="white",
             border_width=1,
-            border_color="#D8D8D8"
-        )
+            border_color="#D8D8D8")
 
-        exercise_card.pack(
-            fill="x",
-            padx=40,
-            pady=8
-        )
+        exercise_card.pack(fill="x",padx=40,pady=8)
 
         exercise_button = ctk.CTkButton(
             exercise_card,
@@ -122,46 +73,27 @@ class HomeFrame(ctk.CTkFrame):
             text_color="#222222",
             font=("Hiragino Sans", 16, "bold"),
             anchor="w",
-            command=self.open_exercise
-        )
+            command=self.open_exercise)
 
-        exercise_button.pack(
-            fill="x",
-            padx=10,
-            pady=(10, 2)
-        )
+        exercise_button.pack(fill="x",padx=10,pady=(10, 2))
 
         exercise_description = ctk.CTkLabel(
             exercise_card,
             text="毎日の運動を記録",
             font=("Hiragino Sans", 12),
             text_color="gray40",
-            anchor="w"
-        )
+            anchor="w")
 
-        exercise_description.pack(
-            fill="x",
-            padx=25,
-            pady=(0, 10)
-        )
-
-        # ==========================
-        # 運動記録グラフカード
-        # ==========================
+        exercise_description.pack(fill="x",padx=25,pady=(0, 10))
 
         graph_card = ctk.CTkFrame(
             self,
             corner_radius=18,
             fg_color="white",
             border_width=1,
-            border_color="#D8D8D8"
-        )
+            border_color="#D8D8D8")
 
-        graph_card.pack(
-            fill="x",
-            padx=40,
-            pady=8
-        )
+        graph_card.pack(fill="x",padx=40,pady=8)
 
         graph_button = ctk.CTkButton(
             graph_card,
@@ -173,46 +105,27 @@ class HomeFrame(ctk.CTkFrame):
             text_color="#222222",
             font=("Hiragino Sans", 16, "bold"),
             anchor="w",
-            command=self.open_exercise_graph
-        )
+            command=self.open_exercise_graph)
 
-        graph_button.pack(
-            fill="x",
-            padx=10,
-            pady=(10, 2)
-        )
+        graph_button.pack(fill="x",padx=10,pady=(10, 2))
 
         graph_description = ctk.CTkLabel(
             graph_card,
             text="記録した運動量をグラフで確認",
             font=("Hiragino Sans", 12),
             text_color="gray40",
-            anchor="w"
-        )
+            anchor="w")
 
-        graph_description.pack(
-            fill="x",
-            padx=25,
-            pady=(0, 10)
-        )
-
-        # ==========================
-        # 健康アドバイスカード
-        # ==========================
+        graph_description.pack(fill="x",padx=25,pady=(0, 10))
 
         advice_card = ctk.CTkFrame(
             self,
             corner_radius=18,
             fg_color="white",
             border_width=1,
-            border_color="#D8D8D8"
-        )
+            border_color="#D8D8D8")
 
-        advice_card.pack(
-            fill="x",
-            padx=40,
-            pady=8
-        )
+        advice_card.pack(fill="x",padx=40,pady=8)
 
         advice_button = ctk.CTkButton(
             advice_card,
@@ -224,73 +137,36 @@ class HomeFrame(ctk.CTkFrame):
             text_color="#222222",
             font=("Hiragino Sans", 16, "bold"),
             anchor="w",
-            command=self.open_advice
-        )
+            command=self.open_advice)
 
-        advice_button.pack(
-            fill="x",
-            padx=10,
-            pady=(10, 2)
-        )
+        advice_button.pack(fill="x",padx=10,pady=(10, 2))
 
-        # ==========================
-        # APIキーによって説明文を変更
-        # ==========================
 
         if api_key != "":
             advice_text = "AIが生活改善を提案"
         else:
             advice_text = "日々のデータからアドバイスを生成"
 
-        # ==========================
-        # 健康アドバイスの説明文
-        # ==========================
-
         advice_description = ctk.CTkLabel(
             advice_card,
             text=advice_text,
             font=("Hiragino Sans", 12),
             text_color="gray40",
-            anchor="w"
-        )
+            anchor="w")
 
-        advice_description.pack(
-            fill="x",
-            padx=25,
-            pady=(0, 10)
-        )
-
-
-    # ==========================
-    # プロフィール画面へ
-    # ==========================
+        advice_description.pack(fill="x",padx=25,pady=(0, 10))
 
     def open_profile(self):
 
         self.master.show_profile()
 
-
-    # ==========================
-    # 運動記録画面へ
-    # ==========================
-
     def open_exercise(self):
 
         self.master.show_exercise()
 
-
-    # ==========================
-    # 運動記録グラフ画面へ
-    # ==========================
-
     def open_exercise_graph(self):
 
         self.master.show_exercise_graph()
-
-
-    # ==========================
-    # 健康アドバイス画面へ
-    # ==========================
 
     def open_advice(self):
 

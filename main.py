@@ -2,7 +2,6 @@ import customtkinter as ctk
 
 from modules.home import HomeFrame
 from modules.profile import ProfileFrame
-#7月17日追加
 from modules.exercise import ExerciseFrame
 from modules.exercise_graph import ExerciseGraphFrame
 from modules.advice import AdviceFrame
@@ -16,8 +15,9 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        self.title("健康管理アプリ")
-        self.geometry("500x500")
+        self.title("ヘルスナビゲーター")
+        self.geometry("500x700")
+        self.minsize(500, 650)
 
         self.current_frame = None
 
@@ -36,14 +36,12 @@ class App(ctk.CTk):
     def show_profile(self):
         self.change_frame(ProfileFrame)
 
-    #7月17日追加
     def show_exercise(self):
         self.change_frame(ExerciseFrame)
 
     def show_exercise_graph(self):
         self.change_frame(ExerciseGraphFrame)
 
-    #7月27日追加
     def show_advice(self):
         self.change_frame(AdviceFrame)
 

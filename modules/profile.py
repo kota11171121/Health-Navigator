@@ -1,8 +1,6 @@
 import customtkinter as ctk
 from tkinter import messagebox
-
 from modules.csv_manager import save_profile, load_profile
-
 class ProfileFrame(ctk.CTkFrame):
 
     def __init__(self, master):
@@ -11,67 +9,42 @@ class ProfileFrame(ctk.CTkFrame):
 
         self.master = master
 
+        self.configure(fg_color="#EAF6FF")
 
-        self.configure(
-            fg_color="#EAF6FF"
-        )
-
-        self.pack(
-            fill="both",
-            expand=True,
-            padx=20,
-            pady=20
-        )
+        self.pack(fill="both",expand=True,padx=20,pady=20)
 
         title = ctk.CTkLabel(
             self,
             text="👤 プロフィール入力",
             font=("Hiragino Sans", 28, "bold"),
-            text_color="#222222"
-        )
+            text_color="#222222")
 
-        title.pack(
-            pady=(20, 5)
-        )
+        title.pack(pady=(20, 5))
 
         subtitle = ctk.CTkLabel(
             self,
             text="あなたの基本情報を登録します",
             font=("Hiragino Sans", 14),
-            text_color="#666666"
-        )
-
-        subtitle.pack(
-            pady=(0, 20)
-        )
-
+            text_color="#666666")
+        
+        subtitle.pack(pady=(0, 20))
 
         info_card = ctk.CTkFrame(
             self,
             corner_radius=18,
             fg_color="#FFFFFF",
             border_width=1,
-            border_color="#D8D8D8"
-        )
+            border_color="#D8D8D8")
 
-        info_card.pack(
-            fill="x",
-            padx=20,
-            pady=(0, 15)
-        )
+        info_card.pack(fill="x",padx=20,pady=(0, 15))
 
         info_title = ctk.CTkLabel(
             info_card,
             text="💡 この機能について",
             font=("Hiragino Sans", 16, "bold"),
-            text_color="#222222"
-        )
+            text_color="#222222")
 
-        info_title.pack(
-            anchor="w",
-            padx=20,
-            pady=(15, 5)
-        )
+        info_title.pack(anchor="w",padx=20,pady=(15, 5))
 
         info_text = ctk.CTkLabel(
             info_card,
@@ -84,14 +57,9 @@ class ProfileFrame(ctk.CTkFrame):
             font=("Hiragino Sans", 12),
             text_color="#666666",
             justify="left",
-            anchor="w"
-        )
+            anchor="w")
 
-        info_text.pack(
-            fill="x",
-            padx=20,
-            pady=(0, 15)
-        )
+        info_text.pack(fill="x",padx=20,pady=(0, 15))
 
 
         form_card = ctk.CTkFrame(
@@ -99,69 +67,39 @@ class ProfileFrame(ctk.CTkFrame):
             corner_radius=18,
             fg_color="#FFFFFF",
             border_width=1,
-            border_color="#D8D8D8"
-        )
+            border_color="#D8D8D8")
 
-        form_card.pack(
-            fill="both",
-            expand=True,
-            padx=20,
-            pady=5
-        )
+        form_card.pack(fill="both",expand=True,padx=20,pady=5)
 
         self.entries = {}
 
-        items = [
-            "名前",
-            "年齢",
-            "性別",
-            "身長(cm)",
-            "体重(kg)"
-        ]
-
+        items = ["名前","年齢","性別","身長(cm)","体重(kg)"]
 
         for item in items:
 
-            row = ctk.CTkFrame(
-                form_card,
-                fg_color="transparent"
-            )
+            row = ctk.CTkFrame(form_card,fg_color="transparent")
 
-            row.pack(
-                fill="x",
-                padx=25,
-                pady=7
-            )
+            row.pack(fill="x",padx=25,pady=7)
 
             label = ctk.CTkLabel(
                 row,
                 text=item,
-                width=110,
+                width=80,
                 anchor="w",
                 font=("Hiragino Sans", 13, "bold"),
-                text_color="#333333"
-            )
+                text_color="#333333")
 
-            label.pack(
-                side="left"
-            )
+            label.pack(side="left")
 
             entry = ctk.CTkEntry(
                 row,
-                height=38,
+                height=32,
                 corner_radius=10,
-                font=("Hiragino Sans", 13)
-            )
+                font=("Hiragino Sans", 13))
 
-            entry.pack(
-                side="left",
-                fill="x",
-                expand=True,
-                padx=(10, 0)
-            )
+            entry.pack(side="left",fill="x",expand=True,padx=(10, 0))
 
             self.entries[item] = entry
-
 
         save_button = ctk.CTkButton(
             self,
@@ -169,16 +107,9 @@ class ProfileFrame(ctk.CTkFrame):
             height=45,
             corner_radius=14,
             font=("Hiragino Sans", 15, "bold"),
-            command=self.save
-        )
+            command=self.save)
 
-        save_button.pack(
-            fill="x",
-            padx=40,
-            pady=(15, 8)
-        )
-
-
+        save_button.pack(fill="x",padx=40,pady=(15, 8))
 
         home_button = ctk.CTkButton(
             self,
@@ -191,22 +122,11 @@ class ProfileFrame(ctk.CTkFrame):
             border_width=1,
             border_color="#D0D0D0",
             font=("Hiragino Sans", 13),
-            command=self.master.show_home
-        )
+            command=self.master.show_home)
 
-        home_button.pack(
-            fill="x",
-            padx=40,
-            pady=(0, 15)
-        )
-
-
+        home_button.pack(fill="x",padx=40,pady=(0, 15))
 
         self.load()
-
-    # ==========================================
-    # プロフィール保存
-    # ==========================================
 
     def save(self):
 
@@ -215,52 +135,36 @@ class ProfileFrame(ctk.CTkFrame):
             self.entries["年齢"].get(),
             self.entries["性別"].get(),
             self.entries["身長(cm)"].get(),
-            self.entries["体重(kg)"].get()
-        ]
+            self.entries["体重(kg)"].get()]
 
 
         if not data[0]:
 
-            messagebox.showwarning(
-                "入力確認",
-                "名前を入力してください。"
-            )
+            messagebox.showwarning("入力確認","名前を入力してください。")
 
             return
 
         if not data[1]:
 
-            messagebox.showwarning(
-                "入力確認",
-                "年齢を入力してください。"
-            )
+            messagebox.showwarning("入力確認","年齢を入力してください。")
 
             return
 
         if not data[2]:
 
-            messagebox.showwarning(
-                "入力確認",
-                "性別を入力してください。"
-            )
+            messagebox.showwarning("入力確認","性別を入力してください。")
 
             return
 
         if not data[3]:
 
-            messagebox.showwarning(
-                "入力確認",
-                "身長を入力してください。"
-            )
+            messagebox.showwarning("入力確認","身長を入力してください。")
 
             return
 
         if not data[4]:
 
-            messagebox.showwarning(
-                "入力確認",
-                "体重を入力してください。"
-            )
+            messagebox.showwarning("入力確認","体重を入力してください。")
 
             return
 
@@ -272,29 +176,20 @@ class ProfileFrame(ctk.CTkFrame):
 
         except ValueError:
 
-            messagebox.showwarning(
-                "入力確認",
-                "身長と体重は数字で入力してください。"
-            )
+            messagebox.showwarning("入力確認","身長と体重は数字で入力してください。")
 
             return
 
         if height <= 0 or weight <= 0:
 
-            messagebox.showwarning(
-                "入力確認",
-                "身長と体重には0より大きい数字を入力してください。"
-            )
+            messagebox.showwarning("入力確認","身長と体重には0より大きい数字を入力してください。")
 
             return
 
 
         save_profile(data)
 
-        messagebox.showinfo(
-            "保存完了",
-            "プロフィールを保存しました。"
-        )
+        messagebox.showinfo("保存完了","プロフィールを保存しました。")
 
 
     def load(self):
@@ -303,22 +198,10 @@ class ProfileFrame(ctk.CTkFrame):
 
         if data:
 
-            keys = [
-                "名前",
-                "年齢",
-                "性別",
-                "身長(cm)",
-                "体重(kg)"
-            ]
+            keys = ["名前","年齢","性別","身長(cm)","体重(kg)"]
 
             for key, value in zip(keys, data):
 
-                self.entries[key].delete(
-                    0,
-                    "end"
-                )
+                self.entries[key].delete(0,"end")
 
-                self.entries[key].insert(
-                    0,
-                    value
-                )
+                self.entries[key].insert(0,value)
