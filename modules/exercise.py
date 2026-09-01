@@ -158,14 +158,11 @@ class ExerciseFrame(ctk.CTkFrame):
 
         if not walk:
             walk = "0"
-
         try:
             walk_value = float(walk)
-
         except ValueError:
             messagebox.showwarning("入力確認","徒歩時間は数字で入力してください。")
             return
-
         if walk_value < 0:
             messagebox.showwarning("入力確認","徒歩時間は0以上で入力してください。")
             return

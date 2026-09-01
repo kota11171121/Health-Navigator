@@ -2,9 +2,7 @@ import customtkinter as ctk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
-
 from modules.csv_manager import load_exercise
-
 
 class ExerciseGraphFrame(ctk.CTkFrame):
 
